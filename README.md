@@ -20,6 +20,6 @@ Ultimately, the Simple VAE architecture was chosen for the best performance.
 <div align="center">
   <figure>
     <img src="img/model.png" alt="fundus" width="700"/>
-    <figcaption style="text-align:center;"><em>Figure 1. Architecture of the model.</em></figcaption>
+    <figcaption style="text-align:center;"><em>Figure 1. Architecture of the VAE model.</em></figcaption>
   </figure>
 </div>
