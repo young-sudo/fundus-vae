@@ -1,4 +1,4 @@
-# Glaucoma Detector using VAE
+# Glaucoma Detector with VAE
 
 *by Younginn Park*
 
@@ -11,7 +11,7 @@
 This project presents a Variational Autoencoder (VAE) implemented in TensorFlow. Originally developed in a **Kaggle notebook**, the model is applied to the **Fundus Glaucoma Detection dataset** to explore unsupervised learning techniques for medical imaging. The project demonstrates the use of VAEs for dimensionality reduction, feature extraction, and potential glaucoma-related anomaly detection in retinal images.
 
 <p align="center">
-  <img src="img/fundus.png" alt="fundus" width="600"/>
+  <img src="https://raw.githubusercontent.com/young-sudo/fundus-vae/main/img/fundus.png" alt="fundus" width="600"/>
 </p>
 
 Originally written in Kaggle notebook for the [Fundus Glaucoma Detection Dataset](https://www.kaggle.com/datasets/sabari50312/fundus-pytorch).
@@ -25,7 +25,7 @@ Ultimately, the Simple VAE architecture was chosen for the best performance.
 
 <div align="center">
   <figure>
-    <img src="img/model.png" alt="fundus" width="500"/><br>
+    <img src="https://raw.githubusercontent.com/young-sudo/fundus-vae/main/img/model.png" alt="fundus" width="500"/><br>
     <figcaption style="text-align:center;"><em>Figure 1. Architecture of the VAE model.</em></figcaption>
   </figure>
 </div>
