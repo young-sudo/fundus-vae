@@ -17,6 +17,24 @@ This project presents a Variational Autoencoder (VAE) implemented in TensorFlow.
 
 Originally written in Kaggle notebook for the [Fundus Glaucoma Detection Dataset](https://www.kaggle.com/datasets/sabari50312/fundus-pytorch).
 
+# Methods
+
+## Vanilla VAE
+
+Variational Autoencoders (VAEs) are a class of generative models that learn a probabilistic mapping between observed data $x$ and a set of latent variables $z$. A standard VAE consists of an encoder that approximates the posterior distribution $q(z|x)$ and a decoder that defines the likelihood $p(x|z)$, with a simple prior $p(z)$, typically a standard normal distribution. Training is performed by maximizing the Evidence Lower Bound (ELBO), which balances accurate reconstruction of the data with regularization of the latent space via a Kullback–Leibler divergence term, encouraging meaningful and continuous latent representations.
+
+* Probabilistic model: $p(x,z)=p(x|z)p(z)$
+* Inference model: $q(z|x)$
+* ELBO formulation: $\mathbb{E}{q(z|x)}[\log p(x|z)]-D{KL}(q(z|x),|,p(z))$
+
+<div align="center">
+  <figure>
+    <img src="https://raw.githubusercontent.com/young-sudo/fundus-vae/main/img/vae.png" alt="tests" width="500"/><br>
+    <figcaption style="text-align:center;"><em>Architecture of a Vanilla VAE model (source: medium)</em></figcaption>
+  </figure>
+</div>
+
+## Hierarchical VAE
 
 Hierarchical Variational Autoencoders (VAEs) represent an advanced evolution of the standard VAE framework, featuring a multi-layered latent variable structure. This hierarchical structure, akin to a Bayesian network, enables capturing complex data distributions through a nuanced representation with multiple latent layers, where each layer is dependent on its predecessor.
 
@@ -25,6 +43,7 @@ In a simple hierarchical VAE model with two latent layers, $z_2$ and $z_1$, the 
 - **Inference model**: $q(z_1,z_2|x)=q(z_1|x)q(z_2|z_1)$
 - **ELBO formulation**: $E_{q(z_1|z_2)}-D_{KL}(q(z_1|x)‖p(z_1))-D_{KL}(q(z_2|z_1)‖p(z_2))$
 
+## Implementation
 
 3 VAE architectures were taken into consideration:
 - Simple VAE - having simple Encoder and Decoder with 3 convolutional layers (dims=16,32,64) and 1 latent layer
