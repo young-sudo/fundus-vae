@@ -9,13 +9,22 @@
 ![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white)
 ![Seaborn](https://img.shields.io/badge/Seaborn-82C8D9?style=for-the-badge&logo=chartdotjs&logoColor=black) 
 
-This project presents a Variational Autoencoder (VAE) implemented in TensorFlow. Originally developed in a **Kaggle notebook**, the model is applied to the **Fundus Glaucoma Detection dataset** to explore unsupervised learning techniques for medical imaging. The project demonstrates the use of VAEs for dimensionality reduction, feature extraction, and potential glaucoma-related anomaly detection in retinal images.
+This project presents a Variational Autoencoder (VAE) implemented in TensorFlow. Originally developed in a **Kaggle notebook**, the model is applied to the **SMDG-19 Fundus Glaucoma Detection dataset**, a comprehensive collection that merges 19 public datasets into a single standardized format, to explore unsupervised learning techniques for medical imaging. The project demonstrates the use of VAEs for dimensionality reduction, feature extraction, and potential glaucoma-related anomaly detection in retinal images.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/young-sudo/fundus-vae/main/img/fundus.png" alt="fundus" width="600"/>
 </p>
 
 Originally written in Kaggle notebook for the [Fundus Glaucoma Detection Dataset](https://www.kaggle.com/datasets/sabari50312/fundus-pytorch).
+
+
+Hierarchical Variational Autoencoders (VAEs) represent an advanced evolution of the standard VAE framework, featuring a multi-layered latent variable structure. This hierarchical structure, akin to a Bayesian network, enables capturing complex data distributions through a nuanced representation with multiple latent layers, where each layer is dependent on its predecessor.
+
+In a simple hierarchical VAE model with two latent layers, $z_2$ and $z_1$, the relationship is such that $z_1$ is dependent on $z_2$, forming a sequential structure $z_2 \rightarrow z_1$. This leads to a distinct alteration in both the VAE's architecture and its probabilistic model:
+- **Probabilistic model**: $p(x,z_1,z_2)=p(x|z_1)p(z_1|z_2)p(z_2)$
+- **Inference model**: $q(z_1,z_2|x)=q(z_1|x)q(z_2|z_1)$
+- **ELBO formulation**: $E_{q(z_1|z_2)}-D_{KL}(q(z_1|x)‖p(z_1))-D_{KL}(q(z_2|z_1)‖p(z_2))$
+
 
 3 VAE architectures were taken into consideration:
 - Simple VAE - having simple Encoder and Decoder with 3 convolutional layers (dims=16,32,64) and 1 latent layer
@@ -24,9 +33,20 @@ Originally written in Kaggle notebook for the [Fundus Glaucoma Detection Dataset
 
 Ultimately, the Simple VAE architecture was chosen for the best performance.
 
+Different sets of parameters were tested:
+
+<div align="center">
+  <figure>
+    <img src="https://raw.githubusercontent.com/young-sudo/fundus-vae/main/img/tests.png" alt="tests" width="500"/><br>
+    <figcaption style="text-align:center;"><em>Tests for parameters beta (strength of KL Loss) and latent dimensions</em></figcaption>
+  </figure>
+</div>
+
+The final architecture of the model looked like this:
+
 <div align="center">
   <figure>
     <img src="https://raw.githubusercontent.com/young-sudo/fundus-vae/main/img/model.png" alt="fundus" width="500"/><br>
-    <figcaption style="text-align:center;"><em>Figure 1. Architecture of the VAE model.</em></figcaption>
+    <figcaption style="text-align:center;"><em>Architecture of the VAE model.</em></figcaption>
   </figure>
 </div>
