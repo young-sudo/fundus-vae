@@ -36,14 +36,20 @@ Variational Autoencoders (VAEs) are a class of generative models that learn a pr
 
 ## Hierarchical VAE
 
-Hierarchical Variational Autoencoders (VAEs) represent an advanced evolution of the standard VAE framework, featuring a multi-layered latent variable structure. This hierarchical structure, akin to a Bayesian network, enables capturing complex data distributions through a nuanced representation with multiple latent layers, where each layer is dependent on its predecessor.
+[Hierarchical Variational Autoencoders](https://proceedings.mlr.press/v139/havtorn21a.html) (VAEs) represent an advanced evolution of the standard VAE framework, featuring a multi-layered latent variable structure. This hierarchical structure, akin to a Bayesian network, enables capturing complex data distributions through a nuanced representation with multiple latent layers, where each layer is dependent on its predecessor.
 
 In a simple hierarchical VAE model with two latent layers, $z_2$ and $z_1$, the relationship is such that $z_1$ is dependent on $z_2$, forming a sequential structure $z_2 \rightarrow z_1$. This leads to a distinct alteration in both the VAE's architecture and its probabilistic model:
 - **Probabilistic model**: $p(x,z_1,z_2)=p(x|z_1)p(z_1|z_2)p(z_2)$
 - **Inference model**: $q(z_1,z_2|x)=q(z_1|x)q(z_2|z_1)$
 - **ELBO formulation**: $E_{q(z_1|z_2)}-D_{KL}(q(z_1|x)‖p(z_1))-D_{KL}(q(z_2|z_1)‖p(z_2))$
 
-## Implementation
+## AlexNet-like VAE
+
+[AlexNet](https://dl.acm.org/doi/abs/10.1145/3065386) is a pioneering deep convolutional neural network architecture that achieved a breakthrough in large-scale image classification by winning the 2012 ImageNet competition, demonstrating the effectiveness of deep CNNs for visual recognition tasks.
+
+An AlexNet-like VAE adopts an encoder–decoder architecture inspired by the convolutional design of the original 2012 AlexNet. The encoder mirrors AlexNet’s deep convolutional stack, using multiple convolutional layers with large receptive fields, strides, and nonlinear activations to progressively extract high-level visual features from the input, which are then mapped to a single latent variable $z$. The decoder follows a symmetric structure, replacing convolutions with transposed convolutions to reconstruct the input from the latent representation. By combining AlexNet’s expressive feature hierarchy with the probabilistic latent modeling of a VAE, this architecture is well suited for learning structured latent representations of complex image data.
+
+# Results
 
 3 VAE architectures were taken into consideration:
 - Simple VAE - having simple Encoder and Decoder with 3 convolutional layers (dims=16,32,64) and 1 latent layer
@@ -54,7 +60,7 @@ Ultimately, the Simple VAE architecture was chosen for the best performance.
 
 Different sets of parameters were tested:
 
-<div align="center">
+<div align="center" style="margin-bottom:20px;">
   <figure>
     <img src="https://raw.githubusercontent.com/young-sudo/fundus-vae/main/img/tests.png" alt="tests" width="500"/><br>
     <figcaption style="text-align:center;"><em>Tests for parameters beta (strength of KL Loss) and latent dimensions</em></figcaption>
@@ -69,3 +75,13 @@ The final architecture of the model looked like this:
     <figcaption style="text-align:center;"><em>Architecture of the VAE model.</em></figcaption>
   </figure>
 </div>
+
+# References
+
+Kingma, D. P., & Welling, M. (2013). Auto-encoding variational bayes. arXiv preprint arXiv:1312.6114.
+
+Kingma, D. P., & Welling, M. (2019). An introduction to variational autoencoders. Foundations and Trends in Machine Learning, 12(4), 307-392.
+
+Havtorn, J. D., Frellsen, J., Hauberg, S., & Maaløe, L. (2021, July). Hierarchical VAEs know what they don’t know. In International Conference on Machine Learning (pp. 4117-4128). PMLR.
+
+Krizhevsky, A., Sutskever, I., & Hinton, G. E. (2012). Imagenet classification with deep convolutional neural networks. Advances in neural information processing systems, 25.
